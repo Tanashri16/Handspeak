@@ -17,6 +17,13 @@ while True:
     if result.multi_hand_landmarks:
         for hand_landmarks in result.multi_hand_landmarks:
             mp_draw.draw_landmarks(img, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+
+            # Extract and print landmark coordinates
+            for id, lm in enumerate(hand_landmarks.landmark):
+                h, w, c = img.shape
+                cx, cy = int(lm.x * w), int(lm.y * h)  # Convert normalized to pixel coordinates
+                print(f"Landmark {id}: x={cx}, y={cy}")
+
     
     cv2.imshow("Hand Detection", img)
     
